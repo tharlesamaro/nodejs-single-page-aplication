@@ -15,7 +15,6 @@
 
 <body>
     <div class="container">
-
         <h1>Cadastro de Nomes</h1>
         <div class="row">
             <div class="col-6">
@@ -45,13 +44,17 @@
             read();
         };
 
+        function templateLi(id, nome) {
+            return `<li class="list-group-item">${nome}</li>`;
+        }
+
         function read() {
             lista.innerHTML = '';
             // chamada ajax para o servidor na rota /read
             axios.get('/read')
                 .then((response) => {
                     response.data.forEach(element => {
-                        lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
+                        lista.innerHTML += templateLi(element.id, element.name);
                     });
                 });
         }
@@ -61,6 +64,7 @@
             axios.post('/create', { name })
                 .then(function (response) {
                     console.log(response);
+                    lista.innerHTML += templateLi(response.data[0], name);
                 })
                 .catch(function (error) {
                     console.log(error);
