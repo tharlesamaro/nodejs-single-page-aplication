@@ -32,7 +32,12 @@ server.listen(8087, function () {
 
 // rotas REST
 
-server.get('/', function (req, res, next) {
+server.get('/', restify.plugins.serveStatic({
+  directory: './dist',
+  file: 'index.html'
+}));
+
+server.get('/read', function (req, res, next) {
 
   knex('rest').then((dados) => {
     res.send(dados);
