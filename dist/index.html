@@ -10,6 +10,7 @@
         crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -31,14 +32,51 @@
         <h1 style="margin-top: 40px;">Lista de nomes</h1>
 
         <div class="row">
-            <div class="">
-                <ul class="list-group">
+            <div class="col-6">
+                <ul class="list-group" id="lista">
 
                 </ul>
             </div>
         </div>
 
     </div>
+
+    <script>
+
+        window.onload = () => {
+            const lista = document.querySelector('#lista');
+            read();
+        };
+
+        function read() {
+            lista.innerHTML = '';
+            // chamada ajax para o servidor na rota /read
+            axios.get('/read')
+                .then((response) => {
+                    response.data.forEach(element => {
+                        lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
+                    });
+                });
+
+        }
+
+        function create() {
+
+        }
+
+        function edit() {
+
+        }
+
+        function update() {
+
+        }
+
+        function del() {
+
+        }
+
+    </script>
 </body>
 
 </html>
