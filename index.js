@@ -1,7 +1,6 @@
 const restify = require('restify');
 const errs = require('restify-errors');
 
-
 const server = restify.createServer({
   name: 'myapp',
   version: '1.0.0'
@@ -31,7 +30,6 @@ server.listen(8087, function () {
 });
 
 // rotas REST
-
 server.get('/', restify.plugins.serveStatic({
   directory: './dist',
   file: 'index.html'
@@ -45,7 +43,6 @@ server.get('/read', function (req, res, next) {
 });
 
 server.post('/create', function (req, res, next) {
-
   knex('rest').
     insert(req.body).
     then((dados) => {
@@ -54,9 +51,7 @@ server.post('/create', function (req, res, next) {
 });
 
 server.get('/show/:id', function (req, res, next) {
-
   const { id } = req.params;
-
   knex('rest').
     where('id', id).
     first().
@@ -67,9 +62,7 @@ server.get('/show/:id', function (req, res, next) {
 });
 
 server.put('/update/:id', function (req, res, next) {
-
   const { id } = req.params;
-
   knex('rest').
     where('id', id).
     update(req.body).
@@ -80,9 +73,7 @@ server.put('/update/:id', function (req, res, next) {
 });
 
 server.del('/delete/:id', function (req, res, next) {
-
   const { id } = req.params;
-
   knex('rest').
     where('id', id).
     delete().
