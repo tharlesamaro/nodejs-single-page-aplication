@@ -26,25 +26,22 @@
                 </button>
             </div>
         </div>
-
         <hr>
-
         <h1 style="margin-top: 40px;">Lista de nomes</h1>
-
         <div class="row">
             <div class="col-6">
-                <ul class="list-group" id="lista">
-
-                </ul>
+                <ul class="list-group" id="lista"></ul>
             </div>
         </div>
-
     </div>
 
     <script>
-
         window.onload = () => {
             const lista = document.querySelector('#lista');
+            const botao = document.querySelector('#botao');
+            const text = document.querySelector('#texto');
+
+            botao.addEventListener('click', create);
             read();
         };
 
@@ -57,26 +54,27 @@
                         lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
                     });
                 });
-
         }
 
         function create() {
-
+            const name = texto.value;
+            axios.post('/create', { name })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
         function edit() {
-
         }
 
         function update() {
-
         }
 
         function del() {
-
         }
-
     </script>
 </body>
-
 </html>

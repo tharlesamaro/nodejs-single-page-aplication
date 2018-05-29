@@ -38,11 +38,9 @@ server.get('/', restify.plugins.serveStatic({
 }));
 
 server.get('/read', function (req, res, next) {
-
   knex('rest').then((dados) => {
     res.send(dados);
   }, next);
-
   return next();
 });
 
